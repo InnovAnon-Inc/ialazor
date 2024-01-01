@@ -68,7 +68,7 @@ ialazor.can_damage = function(_obj)
 	return true
 end
 
-ialazor.fire = function(pos, playername, color, speed, is_th, storage_require_mod)
+ialazor.fire_2 = function(pos, playername, color, speed, is_th, storage_require_mod)
 	if not ialazor.can_shoot(pos, playername) then
 		return
 	end
@@ -122,7 +122,7 @@ end
 
 -- destroy stuff in range
 -- TODO: resilient material list
-ialazor.destroy = function(pos, range, intensity)
+ialazor.destroy_2 = function(pos, range, intensity)
 
 	if not ialazor.can_destroy(pos) then
 		return
@@ -160,7 +160,7 @@ ialazor.destroy = function(pos, range, intensity)
 								minetest.set_node(np, {name="air"})
 								local itemstacks = minetest.get_node_drops(n.name)
 								for _, itemname in ipairs(itemstacks) do
-									if math.random(5) == 5 then
+									if math.random(5) == 5 * range * range * range then
 										-- chance drop
 										minetest.add_item(np, itemname)
 									end
@@ -228,3 +228,117 @@ ialazor.facedir_to_down_dir = function(facing)
 		{x=1, y=0, z=0},
 		{x=0, y=1, z=0}})[math.floor(facing/4)]
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ialazor.fire_1 = function(pos, playername, color, speed, is_th, storage_require_mod)
+	if not ialazor.can_shoot(pos, playername) then
+		return
+	end
+
+	-- check fuel/power
+	local meta = minetest.get_meta(pos)
+
+	local config_store = ialazor.config.ki_powerstorage * storage_require_mod
+	if is_th then config_store = ialazor.config.th_powerstorage * storage_require_mod end
+
+	if meta:get_int("powerstorage") < config_store then
+		-- not enough power
+		return
+	end
+
+	-- check ammunition
+	if not is_th then
+		local inv = meta:get_inventory()
+		if inv:is_empty("src") then
+			--minetest.chat_send_player(playername, "No ammunition loaded!")
+			return false
+		end
+		local src_stack = inv:get_list("src")[1]
+		if not src_stack or src_stack:get_name() ~= "ialazor:coilgun_slug" then
+			--minetest.chat_send_player(playername, "Incorrect ammunition!")
+			return
+		end
+	end
+
+	-- use power
+	meta:set_int("powerstorage", 0)
+
+	-- use ammo
+	if not is_th then
+		local src_stack = meta:get_inventory():get_list("src")[1]
+		src_stack:take_item();
+		meta:get_inventory():set_stack("src", 1, src_stack)
+	end
+
+	minetest.sound_play("spacecannon_shoot", {
+		pos = pos,
+		gain = 1.0,
+		max_hear_distance = 16
+	})
+
+	-- TODO fire lazer beam
+	local node = minetest.get_node(pos)
+	local dir = ialazor.facedir_to_down_dir(node.param2)
+	local obj = minetest.add_entity({x=pos.x+dir.x, y=pos.y+dir.y, z=pos.z+dir.z}, "ialazor:energycube_" .. color)
+	obj:setvelocity({x=dir.x*speed, y=dir.y*speed, z=dir.z*speed})
+end
+
+-- destroy stuff in range
+-- TODO: resilient material list
+ialazor.destroy_1 = function(pos, range, intensity)
+
+	if not ialazor.can_destroy(pos) then
+		return
+	end
+
+	local particle_texture = nil
+
+	local step = 10
+	local k    = 1
+	print('range: '..range)
+	print('step : '..step)
+	print('iter : '..(range / step))
+
+	ialazor.destroy_2(pos, step, intensity)
+	
+
+	for n=1,range,step do
+		for dx=-1,1 do
+			for dy=-1,1 do
+				for dz=-1,1 do
+					if dx ~= 0 or dy ~= 0 or dz ~= 0 then
+						local np={x=pos.x+dx*n,y=pos.y+dy*n,z=pos.z+dz*n}
+						print('n : '..n)
+						print('dx: '..dx)
+						print('dy: '..dy)
+						print('dz: '..dz)
+						print('np: '..dump(np))
+						minetest.after(k, ialazor.destroy_2, np, step, intensity)
+						k = k + 1
+					end
+				end
+			end
+		end
+	end
+end
+
+

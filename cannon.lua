@@ -99,7 +99,7 @@ local register_spacecannon_2 = function(def)
 				end
 
 				if collided then
-					ialazor.destroy(pos, def.range, def.intensity)
+					ialazor.destroy_2(pos, def.range, def.intensity)
 					self.penetrated = self.penetrated + 1
 					if self.penetrated >= def.penetration then
 						self.object:remove()
@@ -108,7 +108,7 @@ local register_spacecannon_2 = function(def)
 
 			else
 				-- collision
-				ialazor.destroy(pos, def.range, def.intensity)
+				ialazor.destroy_2(pos, def.range, def.intensity)
 				self.penetrated = self.penetrated + 1
 				if self.penetrated >= def.penetration then
 					self.object:remove()
@@ -143,7 +143,7 @@ local register_spacecannon_2 = function(def)
 			action_on = function (pos)
 				local meta = minetest.get_meta(pos)
 				local owner = meta:get_string("owner")
-				ialazor.fire(pos, owner, def.color, def.speed, def.is_th, def.storage_require_mod)
+				ialazor.fire_2(pos, owner, def.color, def.speed, def.is_th, def.storage_require_mod)
 			end
 		}},
 
@@ -225,7 +225,7 @@ local register_spacecannon_2 = function(def)
 			local meta = minetest.get_meta(pos)
 
 			if fields.fire then
-				ialazor.fire(pos, playername, def.color, def.speed, def.is_th, def.storage_require_mod)
+				ialazor.fire_2(pos, playername, def.color, def.speed, def.is_th, def.storage_require_mod)
 			end
 
 			if fields.set_digiline_channel and fields.digiline_channel then
@@ -365,7 +365,7 @@ local register_spacecannon_1 = function(def)
 
 				if collided then
 					-- TODO destroy_1
-					ialazor.destroy(pos, def.range, def.intensity)
+					ialazor.destroy_1(pos, def.range, def.intensity)
 					self.penetrated = self.penetrated + 1
 					if self.penetrated >= def.penetration then
 						self.object:remove()
@@ -375,7 +375,7 @@ local register_spacecannon_1 = function(def)
 			else
 				-- collision
 				-- TODO destroy_1
-				ialazor.destroy(pos, def.range, def.intensity)
+				ialazor.destroy_1(pos, def.range, def.intensity)
 				self.penetrated = self.penetrated + 1
 				if self.penetrated >= def.penetration then
 					self.object:remove()
@@ -411,7 +411,7 @@ local register_spacecannon_1 = function(def)
 				local meta = minetest.get_meta(pos)
 				local owner = meta:get_string("owner")
 				-- TODO fire_1
-				ialazor.fire(pos, owner, def.color, def.speed, def.is_th, def.storage_require_mod)
+				ialazor.fire_1(pos, owner, def.color, def.speed, def.is_th, def.storage_require_mod)
 			end
 		}},
 
@@ -494,7 +494,7 @@ local register_spacecannon_1 = function(def)
 
 			if fields.fire then
 				-- TODO fire_1
-				ialazor.fire(pos, playername, def.color, def.speed, def.is_th, def.storage_require_mod)
+				ialazor.fire_1(pos, playername, def.color, def.speed, def.is_th, def.storage_require_mod)
 			end
 
 			if fields.set_digiline_channel and fields.digiline_channel then

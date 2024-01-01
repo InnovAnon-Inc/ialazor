@@ -1,11 +1,13 @@
+local MP = minetest.get_modpath("ialazor")
 local cannon = dofile(MP.."/cannon.lua")
+local cable_entry = "^technic_cable_connection_overlay.png"
 
-local       range_factor = 100
-local     timeout_factor = 100
-local      damage_factor = 100
-local   intensity_factor = 100
-local       speed_factor =   2
-local penetration_factor =  10
+local       range_factor =   10
+local     timeout_factor = 1000
+local      damage_factor =  100
+local   intensity_factor =  100
+local       speed_factor =    2
+local penetration_factor =   10
 
 cannon.register_spacecannon_1({
 	color               = "green",
@@ -58,12 +60,12 @@ cannon.register_spacecannon_1({
 -- TODO these can use the normal spacecannon explosion, but with ridiculous penetration and timeout
 -- Railguns
 
-      range_factor =   10
-    timeout_factor =   10
-     damage_factor =   10
-  intensity_factor =   10
-      speed_factor =    2
-penetration_factor =  100
+--      range_factor =   10
+--    timeout_factor =   1000
+--     damage_factor =   10
+--  intensity_factor =   10
+--      speed_factor =    2
+--penetration_factor =  100
 
 -- Regular railgun
 cannon.register_spacecannon_2({
