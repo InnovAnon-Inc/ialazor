@@ -27,7 +27,7 @@ local MP = minetest.get_modpath("ialazor")
 
 dofile(MP.."/util.lua")
 dofile(MP.."/digiline.lua")
-dofile(MP.."/cannon.lua")
+dofile(MP.."/cannons.lua")
 dofile(MP.."/ammo.lua")
 dofile(MP.."/node_resilience.lua")
 
