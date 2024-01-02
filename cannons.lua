@@ -13,7 +13,7 @@ local penetration_factor =   10
 cannon.register_spacecannon_1({
 	color               = "green",
 	color_desc          = "Green",
-	name                = "Ion laser",
+	name                = "Enhanced Ion laser",
 	desc                = "fast, low damage",
 	is_th               = true,
 	range               =  1 *       range_factor,
@@ -29,7 +29,7 @@ cannon.register_spacecannon_1({
 cannon.register_spacecannon_1({
 	color               = "yellow",
 	color_desc          = "Yellow",
-	name                = "Plasma laser",
+	name                = "Enhanced Plasma laser",
 	desc                = "medium speed, medium damage",
 	is_th               = true,
 	range               =  3 *       range_factor,
@@ -45,7 +45,7 @@ cannon.register_spacecannon_1({
 cannon.register_spacecannon_1({
 	color               = "red",
 	color_desc          = "Red",
-	name                = "Nova laser",
+	name                = "Enhanced Nova laser",
 	desc                = "slow, heavy damage",
 	is_th               = true,
 	range               =  5 *       range_factor,
@@ -124,7 +124,7 @@ cannon.register_spacecannon_2({
 cannon.register_spacecannon_2({
 	color               = "orange",
 	color_desc          = "Orange",
-	name                = "Helical coilgun cannon", --
+	name                = "Hellmouth coilgun cannon", --
 	desc                = "fast, 8x penetrating damage",
 	textures            = { -- TODO distinct images
 		"railgun_blank.png" .. cable_entry,
