@@ -145,3 +145,54 @@ cannon.register_spacecannon_2({
 	penetration         =  8 * penetration_factor,
 	ingredient          = "ialazor:cannon_purple"
 })
+
+--
+--
+--
+
+cannon.register_spacecannon_3({
+	color               = "green", -- TODO
+	color_desc          = "Green",
+	name                = "Incindiary Ion laser",
+	desc                = "fast, low damage",
+	is_th               = true,
+	range               =  2 *       range_factor,
+	storage_require_mod =  1,
+	damage              =  5 *      damage_factor,
+	intensity           =  1 *   intensity_factor,
+	timeout             =  8 *     timeout_factor,
+	speed               = 10 *       speed_factor,
+	penetration         =  0 * penetration_factor,
+	ingredient          = "ialazor:cannon_red" -- TODO
+})
+
+cannon.register_spacecannon_3({
+	color               = "yellow", -- TODO
+	color_desc          = "Yellow",
+	name                = "Incindiary Plasma laser",
+	desc                = "medium speed, medium damage",
+	is_th               = true,
+	range               =  5 *       range_factor,
+	storage_require_mod =  3,
+	intensity           =  2 *   intensity_factor,
+	damage              =  8 *      damage_factor,
+	timeout             =  8 *     timeout_factor,
+	speed               =  5 *       speed_factor,
+	penetration         =  0 * penetration_factor,
+	ingredient          = "ialazor:firecannon_green" -- TODO
+})
+cannon.register_spacecannon_3({
+	color               = "red", -- TODO
+	color_desc          = "Red",
+	name                = "Incindiary Nova laser",
+	desc                = "slow, heavy damage",
+	is_th               = true,
+	range               =  8 *       range_factor,
+	storage_require_mod =  5,
+	intensity           =  4 *   intensity_factor,
+	damage              = 10 *      damage_factor,
+	timeout             = 15 *     timeout_factor,
+	speed               =  3 *       speed_factor,
+	penetration         =  0 * penetration_factor,
+	ingredient          = "ialazor:firecannon_yellow" -- TODO
+})

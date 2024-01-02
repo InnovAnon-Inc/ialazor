@@ -347,3 +347,237 @@ ialazor.destroy_1 = function(pos, range, intensity)
 end
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ialazor.fire_3 = function(pos, playername, color, speed, is_th, storage_require_mod)
+	if not ialazor.can_shoot(pos, playername) then
+		return
+	end
+
+	-- check fuel/power
+	local meta = minetest.get_meta(pos)
+
+	local config_store = ialazor.config.ki_powerstorage * storage_require_mod
+	if is_th then config_store = ialazor.config.th_powerstorage * storage_require_mod end
+
+	if meta:get_int("powerstorage") < config_store then
+		-- not enough power
+		return
+	end
+
+	-- check ammunition
+	if not is_th then
+		local inv = meta:get_inventory()
+		if inv:is_empty("src") then
+			--minetest.chat_send_player(playername, "No ammunition loaded!")
+			return false
+		end
+		local src_stack = inv:get_list("src")[1]
+		if not src_stack or src_stack:get_name() ~= "ialazor:coilgun_slug" then
+			--minetest.chat_send_player(playername, "Incorrect ammunition!")
+			return
+		end
+	end
+
+	-- use power
+	meta:set_int("powerstorage", 0)
+
+	-- use ammo
+	if not is_th then
+		local src_stack = meta:get_inventory():get_list("src")[1]
+		src_stack:take_item();
+		meta:get_inventory():set_stack("src", 1, src_stack)
+	end
+
+	minetest.sound_play("spacecannon_shoot", {
+		pos = pos,
+		gain = 1.0,
+		max_hear_distance = 16
+	})
+
+	local node = minetest.get_node(pos)
+	local dir = ialazor.facedir_to_down_dir(node.param2)
+	local obj = minetest.add_entity({x=pos.x+dir.x, y=pos.y+dir.y, z=pos.z+dir.z}, "ialazor:fireenergycube_" .. color)
+	obj:setvelocity({x=dir.x*speed, y=dir.y*speed, z=dir.z*speed})
+end
+
+-- destroy stuff in range
+-- TODO: resilient material list
+ialazor.destroy_3 = function(pos, range, intensity)
+
+	if not ialazor.can_destroy(pos) then
+		return
+	end
+
+	local particle_texture = nil
+
+	local minp  = {x=pos.x-range,y=pos.y-range,z=pos.z-range}
+	local maxp  = {x=pos.x+range,y=pos.y+range,z=pos.z+range}
+	--local nodes, _ = minetest.find_nodes_in_area_under_air(minp, maxp, {"air",})
+	local nodes, _ = minetest.find_nodes_in_area_under_air(minp, maxp, {
+		"group:flammable",
+		"group:tree", "group:leafdecay", "group:flora",
+		"group:soil",
+		"group:wood","group:leaves",
+	})
+	for _, np in ipairs(nodes) do
+		local npp = {x=np.x, y=np.y+1, z=np.z}
+		minetest.set_node(npp, {name="fire:basic_flame",})
+	end
+	
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"default:snow","default:ice",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:water_flowing",})
+	end
+
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"group:water",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:lava_flowing",})
+	end
+
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"group:soil",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:dry_dirt",})
+	end
+
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"group:sand",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:glass",})
+	end
+
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"default:cobble","default:mossycobble","default:gravel",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:stone",})
+	end
+	
+	local radius = range
+
+	minetest.add_particlespawner({
+			amount = 64,
+			time = 0.5,
+			minpos = vector.subtract(pos, radius / 2),
+			maxpos = vector.add(pos, radius / 2),
+			minvel = {x = -10, y = -10, z = -10},
+			maxvel = {x = 10, y = 10, z = 10},
+			minacc = vector.new(),
+			maxacc = vector.new(),
+			minexptime = 1,
+			maxexptime = 2.5,
+			minsize = radius * 3,
+			maxsize = radius * 5,
+			texture = "fire_basic_flame.png",
+			glow = 5
+	})
+
+	-- TODO other particle texture ?
+
+	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.5, max_hear_distance = math.min(radius * 20, 128)})
+end
+
+ialazor.destroy_4 = function(pos, range, intensity)
+
+	if not ialazor.can_destroy(pos) then
+		return
+	end
+
+	local particle_texture = nil
+
+	--local step = 10
+	local step = 20
+	local k    = 1
+	print('range: '..range)
+	print('step : '..step)
+	print('iter : '..(range / step))
+
+	ialazor.destroy_3(pos, step, intensity)
+
+	local step2 = step
+	--local step2 = step / 2
+	--local step2 = math.sqrt(step)
+	local I = math.ceil(range / step2)
+
+	for i=1,I do
+		for dx=-1,1 do
+			for dy=-1,1 do
+				for dz=-1,1 do
+					if dx ~= 0 or dy ~= 0 or dz ~= 0 then
+						local n = i * step2
+						local np={x=pos.x+dx*n,y=pos.y+dy*n,z=pos.z+dz*n}
+						print('n : '..n)
+						print('dx: '..dx)
+						print('dy: '..dy)
+						print('dz: '..dz)
+						print('np: '..dump(np))
+						minetest.after(k, ialazor.destroy_3, np, step, intensity)
+						k = k + 1
+					end
+				end
+			end
+		end
+	end
+end
+
+
+
