@@ -1,4 +1,4 @@
-local power_factor = 1000
+local power_factor = 10000
 
 local colors = {"green", "blue", "red",}
 for _,color in ipairs(colors) do
