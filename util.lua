@@ -319,13 +319,18 @@ ialazor.destroy_1 = function(pos, range, intensity)
 	print('iter : '..(range / step))
 
 	ialazor.destroy_2(pos, step, intensity)
-	
 
-	for n=1,range,step do
+	--local step2 = step
+	--local step2 = step / 2
+	local step2 = math.sqrt(step)
+	local I = math.ceil(range / step2)
+
+	for i=1,I do
 		for dx=-1,1 do
 			for dy=-1,1 do
 				for dz=-1,1 do
 					if dx ~= 0 or dy ~= 0 or dz ~= 0 then
+						local n = i * step2
 						local np={x=pos.x+dx*n,y=pos.y+dy*n,z=pos.z+dz*n}
 						print('n : '..n)
 						print('dx: '..dx)
