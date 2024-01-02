@@ -668,6 +668,7 @@ def = table.copy(def)
 def.description = "Natural Gas" -- S("Natural Gas")
 def.walkable = false
 def.groups.flammable = 5
+def.groups.air = 1
 def.drowning = 1
 def.color = "green"
 def.post_effect_color = def.color
