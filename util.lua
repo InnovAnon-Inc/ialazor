@@ -476,7 +476,8 @@ ialazor.destroy_3 = function(pos, range, intensity)
 	local minp  = {x=pos.x-range,y=pos.y-range,z=pos.z-range}
 	local maxp  = {x=pos.x+range,y=pos.y+range,z=pos.z+range}
 	--local nodes, _ = minetest.find_nodes_in_area_under_air(minp, maxp, {"air",})
-	local nodes, _ = minetest.find_nodes_in_area_under_air(minp, maxp, {
+	--local nodes, _ = minetest.find_nodes_in_area_under_air(minp, maxp, {
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {
 		"group:flammable",
 		"group:tree", "group:leafdecay", "group:flora",
 		"group:soil",

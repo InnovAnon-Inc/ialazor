@@ -254,13 +254,13 @@ cannon.register_spacecannon_4({
 	},
 	is_th               = false,
 	--range               =  0 *       range_factor,
-	range               =  1 *       range_factor,
+	range               =  2 *       range_factor,
 	storage_require_mod =  1,
 	intensity           =  2 *   intensity_factor,
 	damage              =  6 *      damage_factor,
 	timeout             = 10 *     timeout_factor,
 	speed               =  9 *       speed_factor,
-	penetration         =  8 * penetration_factor,
+	penetration         = 16 * penetration_factor,
 	ingredient          = "ialazor:firecannon_red"
 })
 
@@ -280,13 +280,14 @@ cannon.register_spacecannon_4({
 	},
 	is_th               = false,
 	--range               =  0 *       range_factor,
-	range               =  1.5 *       range_factor,
+	--range               =  1.5 *       range_factor,
+	range               =  3 *       range_factor,
 	storage_require_mod =  1.5,
 	intensity           =  4 *   intensity_factor,
 	damage              =  6 *      damage_factor,
 	timeout             = 15 *     timeout_factor,
 	speed               = 10 *       speed_factor,
-	penetration         = 16 * penetration_factor,
+	penetration         = 32 * penetration_factor,
 	ingredient          = "ialazor:firecannon_blue"
 })
 
@@ -306,13 +307,14 @@ cannon.register_spacecannon_4({
 	},
 	is_th               = false,
 	--range               =  0 *       range_factor,
-	range               =  2 *       range_factor,
+	--range               =  2 *       range_factor,
+	range               =  4 *       range_factor,
 	storage_require_mod =  2,
 	intensity           =  8 *   intensity_factor,
 	damage              =  6 *      damage_factor,
 	timeout             = 20 *     timeout_factor,
 	speed               = 11 *       speed_factor,
-	penetration         = 32 * penetration_factor,
+	penetration         = 64 * penetration_factor,
 	ingredient          = "ialazor:firecannon_purple"
 })
 
