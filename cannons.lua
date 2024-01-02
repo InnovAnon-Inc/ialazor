@@ -3,7 +3,8 @@ local cannon = dofile(MP.."/cannon.lua")
 local cable_entry = "^technic_cable_connection_overlay.png"
 
 local       range_factor =   10
-local     timeout_factor = 1000
+--local     timeout_factor = 1000
+local     timeout_factor = 60000
 local      damage_factor =  100
 local   intensity_factor =  100
 local       speed_factor =    2
