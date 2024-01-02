@@ -242,7 +242,7 @@ cannon.register_spacecannon_3({
 cannon.register_spacecannon_4({
 	color               = "blue",
 	color_desc          = "Blue",
-	name                = "Incindiary Coilgun cannon",
+	name                = "Gas cannon",
 	desc                = "fast, 2x penetrating damage",
 	textures            = { -- TODO distinct images
 		"railgun_blank.png" .. cable_entry,
@@ -268,7 +268,7 @@ cannon.register_spacecannon_4({
 cannon.register_spacecannon_4({
 	color               = "purple",
 	color_desc          = "Purple",
-	name                = "Incindiary Helical coilgun cannon",
+	name                = "Helical gas cannon",
 	desc                = "fast, 4x penetrating damage",
 	textures            = { -- TODO distinct images
 		"railgun_blank.png" .. cable_entry,
@@ -294,7 +294,7 @@ cannon.register_spacecannon_4({
 cannon.register_spacecannon_4({
 	color               = "orange",
 	color_desc          = "Orange",
-	name                = "Incindiary Hellmouth coilgun cannon", --
+	name                = "Harbinger of Hell gas cannon", --
 	desc                = "fast, 8x penetrating damage",
 	textures            = { -- TODO distinct images
 		"railgun_blank.png" .. cable_entry,
