@@ -196,3 +196,123 @@ cannon.register_spacecannon_3({
 	penetration         =  0 * penetration_factor,
 	ingredient          = "ialazor:firecannon_yellow" -- TODO
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Regular railgun
+cannon.register_spacecannon_4({
+	color               = "blue",
+	color_desc          = "Blue",
+	name                = "Incindiary Coilgun cannon",
+	desc                = "fast, 2x penetrating damage",
+	textures            = { -- TODO distinct images
+		"railgun_blank.png" .. cable_entry,
+		"railgun_front.png",
+		"railgun_blank.png" .. cable_entry,
+		"railgun_blank.png" .. cable_entry,
+		"railgun_top_bottom.png",
+		"railgun_top_bottom.png",
+	},
+	is_th               = false,
+	--range               =  0 *       range_factor,
+	range               =  1 *       range_factor,
+	storage_require_mod =  1,
+	intensity           =  2 *   intensity_factor,
+	damage              =  6 *      damage_factor,
+	timeout             = 10 *     timeout_factor,
+	speed               =  9 *       speed_factor,
+	penetration         =  8 * penetration_factor,
+	ingredient          = "ialazor:firecannon_red"
+})
+
+-- Helical railgun
+cannon.register_spacecannon_4({
+	color               = "purple",
+	color_desc          = "Purple",
+	name                = "Incindiary Helical coilgun cannon",
+	desc                = "fast, 4x penetrating damage",
+	textures            = { -- TODO distinct images
+		"railgun_blank.png" .. cable_entry,
+		"helical_railgun_front.png",
+		"railgun_blank.png" .. cable_entry,
+		"railgun_blank.png" .. cable_entry,
+		"helical_railgun_top_bottom.png",
+		"helical_railgun_top_bottom.png",
+	},
+	is_th               = false,
+	--range               =  0 *       range_factor,
+	range               =  1.5 *       range_factor,
+	storage_require_mod =  1.5,
+	intensity           =  4 *   intensity_factor,
+	damage              =  6 *      damage_factor,
+	timeout             = 15 *     timeout_factor,
+	speed               = 10 *       speed_factor,
+	penetration         = 16 * penetration_factor,
+	ingredient          = "ialazor:firecannon_blue"
+})
+
+-- 
+cannon.register_spacecannon_4({
+	color               = "orange",
+	color_desc          = "Orange",
+	name                = "Incindiary Hellmouth coilgun cannon", --
+	desc                = "fast, 8x penetrating damage",
+	textures            = { -- TODO distinct images
+		"railgun_blank.png" .. cable_entry,
+		"helical_railgun_front.png",
+		"railgun_blank.png" .. cable_entry,
+		"railgun_blank.png" .. cable_entry,
+		"helical_railgun_top_bottom.png",
+		"helical_railgun_top_bottom.png",
+	},
+	is_th               = false,
+	--range               =  0 *       range_factor,
+	range               =  2 *       range_factor,
+	storage_require_mod =  2,
+	intensity           =  8 *   intensity_factor,
+	damage              =  6 *      damage_factor,
+	timeout             = 20 *     timeout_factor,
+	speed               = 11 *       speed_factor,
+	penetration         = 32 * penetration_factor,
+	ingredient          = "ialazor:firecannon_purple"
+})
+
