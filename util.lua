@@ -712,6 +712,11 @@ ialazor.destroy_5 = function(pos, range, intensity)
 		minetest.set_node(np, {name="default:lava_flowing",})
 	end
 
+	local nodes, _ = minetest.find_nodes_in_area(minp, maxp, {"group:stone",})
+	for _, np in ipairs(nodes) do
+		minetest.set_node(np, {name="default:lava_source",})
+	end
+
 	
 	local radius = range
 
